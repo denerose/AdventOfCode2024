@@ -27,5 +27,20 @@ public class Day1 {
             e.printStackTrace();
         }
 
+        list1.sort(null);
+        list2.sort(null);
+
+        int total = 0;
+
+        for (int i = 0; i < list1.size(); i++) {
+            total += getDifference(list1.get(i), list2.get(i));
+        }
+
+        System.out.println("Total: " + total);
+
+    }
+
+    static int getDifference(int n1, int n2) {
+        return Math.abs(n1 - n2);
     }
 }
