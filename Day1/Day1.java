@@ -30,14 +30,42 @@ public class Day1 {
         list1.sort(null);
         list2.sort(null);
 
+        int total = task1(list1, list2);
+        System.out.println("Task 1 Total: " + total);
+
+        int similarity = 0;
+        for (int i = 0; i < list1.size(); i++) {
+            similarity += getSimilarity(list1.get(i), list2);
+        }
+        System.out.println("Task 2 Similarity: " + similarity);
+
+    }
+
+    static int task1(ArrayList<Integer> list1, ArrayList<Integer> list2) {
         int total = 0;
 
         for (int i = 0; i < list1.size(); i++) {
             total += getDifference(list1.get(i), list2.get(i));
         }
 
-        System.out.println("Total: " + total);
+        return total;
+    }
 
+    static int getSimilarity(int target, ArrayList<Integer> list) {
+        int similarity = 0;
+
+        for (int i = 0; i < list.size(); i++) {
+            int num = list.get(i);
+
+            if (num > target) {
+                break;
+            }
+            if (num == target) {
+                similarity++;
+            }
+        }
+
+        return target * similarity;
     }
 
     static int getDifference(int n1, int n2) {
