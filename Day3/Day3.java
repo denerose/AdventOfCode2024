@@ -11,7 +11,9 @@ public class Day3 {
     public static void main(String[] args) {
         System.out.println("Hello, Advent of Code 2024: Day 3");
 
-        Pattern pattern = Pattern.compile("mul\\(\\d+,\\d+\\)");
+        Pattern instruction = Pattern.compile("mul\\(\\d+,\\d+\\)");
+        Pattern pattern = Pattern.compile("(do\\(\\))|(don't\\(\\))|(mul\\(\\d+,\\d+\\))");
+
         ArrayList<String> matches = new ArrayList<String>();
 
         long total = 0;
@@ -33,8 +35,16 @@ public class Day3 {
             e.printStackTrace();
         }
 
+        boolean execute = true;
+
         for (String match : matches) {
-            total += extractAndMultiply(match);
+            if (match.equals("do()")) {
+                execute = true;
+            } else if (match.equals("don't()")) {
+                execute = false;
+            } else if (instruction.matcher(match).matches() && execute) {
+                total += extractAndMultiply(match);
+            }
         }
 
         System.out.println("Total: " + total);

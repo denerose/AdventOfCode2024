@@ -11,7 +11,7 @@ A place to hold my [Advent of Code 2024](https://adventofcode.com/2024) solution
 
 #### Day 3
 - Task 1: 160672468
-- Task 2:
+- Task 2: 84893551
 
 #### Day 4
 - Task 1:
