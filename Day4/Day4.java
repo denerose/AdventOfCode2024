@@ -20,7 +20,8 @@ public class Day4 {
             e.printStackTrace();
         }
 
-        System.out.println("Xmas count: " + findXmas(dataLines));
+        System.out.println("Part 1: Xmas count: " + findXmas(dataLines));
+        System.out.println("Part 2: X-Mas count: " + findMasX(dataLines));
 
     }
 
@@ -39,6 +40,24 @@ public class Day4 {
 
                 if (c == 'A') {
 
+                    char p1 = rows[i - 1][j - 1];
+                    char p2 = rows[i - 1][j + 1];
+                    char p3 = rows[i + 1][j - 1];
+                    char p4 = rows[i + 1][j + 1];
+
+                    if (p1 == 'M') {
+                        if (p2 == 'M' && p3 == 'S' && p4 == 'S') {
+                            masCount++;
+                        } else if (p2 == 'S' && p3 == 'M' && p4 == 'S') {
+                            masCount++;
+                        }
+                    } else if (p1 == 'S') {
+                        if (p2 == 'M' && p3 == 'S' && p4 == 'M') {
+                            masCount++;
+                        } else if (p2 == 'S' && p3 == 'M' && p4 == 'M') {
+                            masCount++;
+                        }
+                    }
                 }
             }
         }
