@@ -13,6 +13,7 @@ public class Day5 {
         ArrayList<ArrayList<Integer>> updates = new ArrayList<>();
         ArrayList<Integer[]> badUpdates = new ArrayList<>();
         ArrayList<Integer> goodMids = new ArrayList<>();
+        ArrayList<Integer> badMids = new ArrayList<>();
 
         try (Scanner rulesScan = new Scanner(new File("Day5/input.txt"))) {
             int i = 0;
@@ -42,7 +43,6 @@ public class Day5 {
         }
 
         for (ArrayList<Integer> update : updates) {
-            System.out.println("Update: " + update);
             boolean good = checkRules(rules, update);
             if (good) {
                 int midPoint = update.size() / 2;
@@ -52,8 +52,17 @@ public class Day5 {
             }
         }
 
-        int total = goodMids.stream().mapToInt(Integer::intValue).sum();
-        System.out.println("Part 1: " + total);
+        int totalP1 = goodMids.stream().mapToInt(Integer::intValue).sum();
+        System.out.println("Part 1: " + totalP1);
+
+        for (Integer[] badUpdate : badUpdates) {
+            ArrayList<Integer> badUpdateList = new ArrayList<>(Arrays.asList(badUpdate));
+            int mid = reOrderBadUpdate(rules, badUpdateList);
+            badMids.add(mid);
+        }
+
+        int totalP2 = badMids.stream().mapToInt(Integer::intValue).sum();
+        System.out.println("Part 2: " + totalP2);
 
     }
 
@@ -68,12 +77,28 @@ public class Day5 {
                 }
             }
         }
-        System.out.println("Good: " + update);
         return true;
     }
 
     public static int reOrderBadUpdate(int[][] rules, ArrayList<Integer> update) {
+        for (int[] rule : rules) {
+            if (update.contains(rule[0]) && update.contains(rule[1])) {
+                int splitPoint = update.indexOf(rule[0]);
+                ArrayList<Integer> left = new ArrayList<>(update.subList(0, splitPoint));
+                if (left.contains(rule[1])) {
+                    int index = left.indexOf(rule[1]);
+                    update.remove(index);
+                    if (update.size() > splitPoint + 1) {
+                        update.add(splitPoint + 1, rule[1]);
+                    } else {
+                        update.add(rule[1]);
+                    }
+                    reOrderBadUpdate(rules, update);
+                }
+            }
+        }
 
+        return update.get(update.size() / 2);
     }
 
 }
