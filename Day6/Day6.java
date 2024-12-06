@@ -1,6 +1,7 @@
 package Day6;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -11,13 +12,12 @@ public class Day6 {
         char[][] grid = new char[130][130];
         int[] startPos = new int[2];
         Direction facingDirection = Direction.UP;
-        int stepCount = 1;
+        int firstTraversal = 0;
 
         try (Scanner scanner = new Scanner(new File("Day6/input.txt"))) {
             int i = 0;
             while (scanner.hasNextLine() && i < grid.length) {
                 String line = scanner.nextLine();
-                System.out.println(line);
                 if (line.contains("^")) {
                     startPos[0] = i;
                     startPos[1] = line.indexOf("^");
@@ -31,9 +31,15 @@ public class Day6 {
         }
 
         System.out.println("Start position: " + startPos[0] + ", " + startPos[1]);
+        firstTraversal = traverse(startPos, Arrays.copyOf(grid, grid.length), facingDirection);
+        System.out.println("First Traversal: " + firstTraversal);
 
+    }
+
+    static int traverse(int[] startPos, char[][] grid, Direction facingDirection) {
         int xPos = startPos[1];
         int yPos = startPos[0];
+        int stepCount = 1;
 
         while (xPos >= 0 && xPos < grid[0].length && yPos >= 0 && yPos < grid.length) {
             int[] nextPos = step(xPos, yPos, facingDirection);
@@ -47,13 +53,10 @@ public class Day6 {
                 }
             } else {
                 facingDirection = facingDirection.next();
-                // System.out.println("Turning to: " + facingDirection);
             }
         }
 
-        printGrid(grid);
-        System.out.println("Steps taken: " + stepCount);
-
+        return stepCount;
     }
 
     static boolean isPathClear(char[][] grid, int x, int y) {
