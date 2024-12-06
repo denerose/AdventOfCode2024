@@ -44,7 +44,6 @@ public class Day6 {
         for (int[] pos : visitedOriginal) {
             char[][] newGrid = Arrays.stream(grid).map(char[]::clone).toArray(char[][]::new);
             newGrid[pos[0]][pos[1]] = 'O';
-            System.out.println("Placing obstruction at: " + pos[0] + ", " + pos[1]);
             if (traverseWithObstruction(startPos, newGrid, facingDirection)) {
                 validLoops++;
             }
@@ -59,24 +58,24 @@ public class Day6 {
         int xPos = startPos[1];
         int yPos = startPos[0];
 
-        boolean firstTraversal = true;
-        ArrayList<int[]> visited = new ArrayList<>();
+        ArrayList<String> visited = new ArrayList<>();
 
         while (peek(currentGrid, xPos, yPos) != 'E') {
 
             int[] nextPos = step(xPos, yPos, facingDirection);
             char nextChar = peek(currentGrid, nextPos[0], nextPos[1]);
 
+            if (visited.contains(xPos + "-" + yPos + "-" + facingDirection.toString())) {
+                return true;
+            }
+
             switch (nextChar) {
                 case 'O':
-                    if (!firstTraversal) {
-                        return true;
-                    } else {
-                        firstTraversal = false;
-                        facingDirection = facingDirection.next();
-                        break;
-                    }
+                    visited.add(xPos + "-" + yPos + "-" + facingDirection.toString());
+                    facingDirection = facingDirection.next();
+                    break;
                 case '#':
+                    visited.add(xPos + "-" + yPos + "-" + facingDirection.toString());
                     facingDirection = facingDirection.next();
                     break;
                 case '.':
@@ -85,10 +84,6 @@ public class Day6 {
                 case '^':
                     xPos = nextPos[0];
                     yPos = nextPos[1];
-                    if (visited.contains(new int[] { yPos, xPos, facingDirection.toNum() })) {
-                        return true;
-                    }
-                    visited.add(new int[] { yPos, xPos, facingDirection.toNum() });
                     break;
                 case 'E':
                     return false;
@@ -173,17 +168,7 @@ public class Day6 {
 
     // ENUM for directions
     enum Direction {
-        UP(1), RIGHT(2), DOWN(3), LEFT(4);
-
-        private int dirNum;
-
-        Direction(int dirNum) {
-            this.dirNum = dirNum;
-        }
-
-        public int toNum() {
-            return this.dirNum;
-        }
+        UP, RIGHT, DOWN, LEFT;
 
         public Direction next() {
             switch (this) {
