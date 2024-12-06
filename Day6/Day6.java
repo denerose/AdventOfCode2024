@@ -1,7 +1,6 @@
 package Day6;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -10,13 +9,15 @@ public class Day6 {
     public static void main(String[] args) {
         System.out.println("Hello, Advent of Code 2024: Day 6");
 
-        char[][] grid = new char[10][10];
+        final int GRIDSIZE = 130;
+
+        char[][] grid = new char[GRIDSIZE][GRIDSIZE];
         int[] startPos = new int[2];
         Direction facingDirection = Direction.UP;
         int firstTraversal = 0;
-        ArrayList<int[]> visited = new ArrayList<>();
+        ArrayList<int[]> visitedOriginal = new ArrayList<>();
 
-        try (Scanner scanner = new Scanner(new File("Day6/test.txt"))) {
+        try (Scanner scanner = new Scanner(new File("Day6/input.txt"))) {
             int i = 0;
             while (scanner.hasNextLine() && i < grid.length) {
                 String line = scanner.nextLine();
@@ -35,27 +36,17 @@ public class Day6 {
         System.out.println("Start position: " + startPos[0] + ", " + startPos[1]);
         char[][] gridCopy = Arrays.stream(grid).map(char[]::clone).toArray(char[][]::new);
 
-        firstTraversal = traverse(startPos, gridCopy, facingDirection, visited);
+        firstTraversal = traverse(startPos, gridCopy, facingDirection, visitedOriginal);
         System.out.println("Part 1: " + firstTraversal);
 
         int validLoops = 0;
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if (i == startPos[0] && j == startPos[1]) {
-                    continue;
-                }
-
-                System.out.println("Obstruction at: " + i + ", " + j);
-                char[][] newGrid = Arrays.stream(grid).map(char[]::clone).toArray(char[][]::new);
-                newGrid[i][j] = 'O';
-
-                boolean valid = traverseWithObstruction(startPos, newGrid, facingDirection);
-
-                System.out.println("Valid: " + valid);
-                if (valid) {
-                    validLoops++;
-                }
+        for (int[] pos : visitedOriginal) {
+            char[][] newGrid = Arrays.stream(grid).map(char[]::clone).toArray(char[][]::new);
+            newGrid[pos[0]][pos[1]] = 'O';
+            System.out.println("Placing obstruction at: " + pos[0] + ", " + pos[1]);
+            if (traverseWithObstruction(startPos, newGrid, facingDirection)) {
+                validLoops++;
             }
         }
 
@@ -63,21 +54,49 @@ public class Day6 {
 
     }
 
-    static boolean traverseWithObstruction(int[] startPos, char[][] grid, Direction facingDirection) {
+    static boolean traverseWithObstruction(int[] startPos, char[][] currentGrid, Direction facingDirection) {
 
         int xPos = startPos[1];
         int yPos = startPos[0];
 
-        while (xPos >= 0 && xPos < grid[0].length && yPos >= 0 && yPos < grid.length) {
-            int[] nextPos = step(xPos, yPos, facingDirection);
+        boolean firstTraversal = true;
+        ArrayList<int[]> visited = new ArrayList<>();
 
-            if (isPathClear(grid, nextPos[0], nextPos[1])) {
-                xPos = nextPos[0];
-                yPos = nextPos[1];
-            } else {
-                facingDirection = facingDirection.next();
+        while (peek(currentGrid, xPos, yPos) != 'E') {
+
+            int[] nextPos = step(xPos, yPos, facingDirection);
+            char nextChar = peek(currentGrid, nextPos[0], nextPos[1]);
+
+            switch (nextChar) {
+                case 'O':
+                    if (!firstTraversal) {
+                        return true;
+                    } else {
+                        firstTraversal = false;
+                        facingDirection = facingDirection.next();
+                        break;
+                    }
+                case '#':
+                    facingDirection = facingDirection.next();
+                    break;
+                case '.':
+                    currentGrid[yPos][xPos] = 'X';
+                case 'X':
+                case '^':
+                    xPos = nextPos[0];
+                    yPos = nextPos[1];
+                    if (visited.contains(new int[] { yPos, xPos, facingDirection.toNum() })) {
+                        return true;
+                    }
+                    visited.add(new int[] { yPos, xPos, facingDirection.toNum() });
+                    break;
+                case 'E':
+                    return false;
+                default:
+                    break;
             }
         }
+
         return false;
     }
 
@@ -141,7 +160,10 @@ public class Day6 {
     }
 
     static void printGrid(char[][] grid) {
+        int i = 0;
         for (char[] row : grid) {
+            System.out.print(i + " ");
+            i++;
             for (char c : row) {
                 System.out.print(c);
             }
@@ -151,7 +173,17 @@ public class Day6 {
 
     // ENUM for directions
     enum Direction {
-        UP, RIGHT, DOWN, LEFT;
+        UP(1), RIGHT(2), DOWN(3), LEFT(4);
+
+        private int dirNum;
+
+        Direction(int dirNum) {
+            this.dirNum = dirNum;
+        }
+
+        public int toNum() {
+            return this.dirNum;
+        }
 
         public Direction next() {
             switch (this) {
