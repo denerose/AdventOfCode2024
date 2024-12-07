@@ -23,7 +23,7 @@ A place to hold my [Advent of Code 2024](https://adventofcode.com/2024) solution
 
 #### Day 6
 - Task 1: 4647
-- Task 2:
+- Task 2: 1723
 
 #### Day 7
 - Task 1:
