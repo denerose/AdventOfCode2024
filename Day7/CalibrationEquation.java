@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CalibrationEquation {
     private long targetValue;
     private ArrayList<Integer> values;
-    private String[] operations = { "add", "multi" };
+    private String[] operations = { "add", "multi", "concat" };
 
     public CalibrationEquation(long targetValue, ArrayList<Integer> values) {
         this.targetValue = targetValue;
@@ -65,7 +65,10 @@ public class CalibrationEquation {
             return accumulator + rNum;
         } else if (operation.equals("multi")) {
             return accumulator * rNum;
+        } else if (operation.equals("concat")) {
+            return Long.parseLong(accumulator + "" + rNum);
         }
+
         return 0;
     }
 
