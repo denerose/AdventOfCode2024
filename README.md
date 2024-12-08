@@ -26,11 +26,11 @@ A place to hold my [Advent of Code 2024](https://adventofcode.com/2024) solution
 - Task 2: 1723
 
 #### Day 7
-- Task 1:
-- Task 2:
+- Task 1: 8401132154762
+- Task 2: 95297119227552
 
 #### Day 8
-- Task 1:
+- Task 1: 276
 - Task 2:
 
 #### Day 9
