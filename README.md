@@ -31,7 +31,7 @@ A place to hold my [Advent of Code 2024](https://adventofcode.com/2024) solution
 
 #### Day 8
 - Task 1: 276
-- Task 2:
+- Task 2: 991
 
 #### Day 9
 - Task 1:
