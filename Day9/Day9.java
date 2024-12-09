@@ -47,17 +47,17 @@ public class Day9 {
         System.out.println("Checksum: " + checksum);
     }
 
-    static int calcChecksum2(ArrayList<Integer> data) {
-        int checksum = 0;
+    static long calcChecksum2(ArrayList<Integer> data) {
+        long checksum = 0;
         for (int i = 0; i < data.size(); i++) {
             int value = data.get(i);
-            checksum += (value * i);
+            checksum = (value > 0) ? checksum += (value * i) : checksum;
         }
         return checksum;
     }
 
-    static int calcChecksum1(ArrayList<Integer> data) {
-        int checksum = 0;
+    static long calcChecksum1(ArrayList<Integer> data) {
+        long checksum = 0;
         for (int i = 0; i < data.size(); i++) {
             int value = data.get(i);
             if (value < 0) {
@@ -97,15 +97,15 @@ public class Day9 {
 
             int blockSize = (blockEnd != blockStart) ? blockEnd - blockStart : 1;
             if (blockSize > largestGap) {
-                largestGap--;
-                i -= blockSize;
+                i -= (blockSize + 1);
                 continue;
             }
 
             int[] gap = findGap(data, blockSize, lastStart);
             if (gap.length <= 0 || gap[0] < 0) {
-                largestGap--;
-                i -= blockSize;
+                largestGap = blockSize - 1;
+                i -= (blockSize + 1);
+                lastStart++;
                 continue;
             }
 
@@ -113,7 +113,8 @@ public class Day9 {
                 Collections.swap(data, index, blockStart);
                 blockStart++;
             }
-            i -= blockSize;
+            i -= (blockSize + 1);
+            lastStart += blockSize;
         }
 
     }
@@ -148,6 +149,29 @@ public class Day9 {
             }
         }
         return new int[] { -1 };
+    }
+
+    // recursive function to find the index of the first block of negative numbers
+    // of x size
+    static int findBlock(ArrayList<Integer> data, int size, int start) {
+        if (start >= data.size()) {
+            return -1;
+        }
+        if (data.get(start) < 0) {
+            return findBlock(data, size, start + 1);
+        }
+        if (size == 1) {
+            return start;
+        }
+        for (int i = start; i < data.size(); i++) {
+            if (data.get(i) < 0) {
+                return findBlock(data, size, i + 1);
+            }
+            if (i - start == size - 1) {
+                return start;
+            }
+        }
+        return -1;
     }
 
 }
