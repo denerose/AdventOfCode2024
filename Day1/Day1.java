@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Day1 {
     public static void main(String[] args) {
-        System.out.println("Hello, Advent of Code 2024!");
+        System.out.println("Hello, Advent of Code 2024: Day 1");
 
         ArrayList<Integer> list1 = new ArrayList<Integer>();
         ArrayList<Integer> list2 = new ArrayList<Integer>();
