@@ -101,7 +101,6 @@ public class Day8 {
     }
 
     static ArrayList<int[]> findSignalNodesRecursive(int[] loc1, int[] loc2, ArrayList<int[]> nodes, int gridSize) {
-        System.out.println("Loc1: " + loc1[0] + " " + loc1[1] + " Loc2: " + loc2[0] + " " + loc2[1]);
         int xDiff = loc1[1] - loc2[1];
         int yDiff = loc1[0] - loc2[0];
         int[] node1 = { loc1[0] + yDiff, loc1[1] + xDiff };
