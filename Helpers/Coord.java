@@ -69,4 +69,12 @@ public class Coord {
     public int getTotalDifference(Coord c) {
         return Math.abs(x - c.getX()) + Math.abs(y - c.getY());
     }
+
+    public Coord getMidPoint(Coord c) {
+        return new Coord((x + c.getX()) / 2, (y + c.getY()) / 2);
+    }
+
+    public Coord addDistance(int[] diff) {
+        return new Coord(x + diff[0], y + diff[1]);
+    }
 }
