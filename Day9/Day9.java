@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 import java.io.File;
-import java.lang.reflect.Array;
 
 public class Day9 {
 
