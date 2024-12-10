@@ -60,7 +60,7 @@ public class Day10 {
 
         for (int direction : directions) {
             Coord next = start.getAdjacentCoord(direction);
-            if (grid.getCell(next) == (char) (target + 1)) {
+            if (!visited.contains(next) && grid.getCell(next) == (char) (target + 1)) {
                 System.out.println("Found: " + grid.getCell(next) + " at " + next);
                 result += countTrails(grid, next, (char) (target + 1), directions, visited);
             }
