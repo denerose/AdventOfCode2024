@@ -3,11 +3,12 @@ package Helpers;
 public class Coord {
     private int x;
     private int y;
-    private int direction;
+    private int d;
 
     public Coord(int x, int y) {
         this.x = x;
         this.y = y;
+        this.d = -1;
     }
 
     public int getX() {
@@ -26,17 +27,17 @@ public class Coord {
         this.y = y;
     }
 
-    public int getDirection() {
-        return direction;
+    public int getD() {
+        return d;
     }
 
-    public void setDirection(int direction) {
-        this.direction = direction;
+    public void setD(int direction) {
+        this.d = direction;
     }
 
     @Override
     public String toString() {
-        return "[" + x + ", " + y + "]";
+        return "[" + y + ", " + x + "]";
     }
 
     public boolean equals(Coord c) {
@@ -49,16 +50,23 @@ public class Coord {
 
     public Coord getAdjacentCoord(int direction) {
         switch (direction) {
+            // up
             case 0:
                 return new Coord(x, y - 1);
+
+            // right
             case 1:
                 return new Coord(x + 1, y);
+
+            // down
             case 2:
                 return new Coord(x, y + 1);
+
+            // left
             case 3:
                 return new Coord(x - 1, y);
             default:
-                return null;
+                return new Coord(x, y);
         }
     }
 

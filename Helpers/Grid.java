@@ -24,7 +24,31 @@ public class Grid {
         }
     }
 
-    public int getGridSize() {
+    public void setRow(int row, char[] rowValues) {
+        for (int i = 0; i < gridSize; i++) {
+            grid[row][i] = rowValues[i];
+        }
+    }
+
+    public char[] getRow(int row) {
+        return grid[row];
+    }
+
+    public char getCell(int row, int col) {
+        if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) {
+            return '`';
+        }
+        return grid[row][col];
+    }
+
+    public char getCell(Coord c) {
+        if (c.getX() < 0 || c.getX() >= gridSize || c.getY() < 0 || c.getY() >= gridSize) {
+            return '`';
+        }
+        return grid[c.getY()][c.getX()];
+    }
+
+    public int size() {
         return gridSize;
     }
 
