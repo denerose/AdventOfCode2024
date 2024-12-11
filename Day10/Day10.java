@@ -22,7 +22,6 @@ public class Day10 {
             while (scanner.hasNextLine() && i < GRIDSZE) {
                 String line = scanner.nextLine();
                 grid.setRow(i, line.toCharArray());
-                System.out.println(grid.getRow(i));
                 i++;
             }
 
@@ -33,7 +32,6 @@ public class Day10 {
 
         System.out.println("Getting all trail heads...");
         ArrayList<Coord> trailHeads = grid.getAllCoords('0');
-        System.out.println("Trail heads: " + trailHeads);
 
         int count = 0;
         int rating = 0;
@@ -43,8 +41,6 @@ public class Day10 {
             count += trailScore;
             rating += rateTrails(grid, trailHead, '0', directions);
         }
-
-        grid.printGridWithCoords();
 
         System.out.println("Number of trails: " + count);
         System.out.println("Rating of trails: " + rating);
