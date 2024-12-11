@@ -48,6 +48,15 @@ public class Grid {
         return grid[c.getY()][c.getX()];
     }
 
+    public int getCellInt(Coord c) {
+        if (c.getX() < 0 || c.getX() >= gridSize || c.getY() < 0 || c.getY() >= gridSize) {
+            return -1;
+        } else if (Character.isDigit(getCell(c))) {
+            return Integer.valueOf(getCell(c));
+        }
+        return Character.getNumericValue(getCell(c));
+    }
+
     public int size() {
         return gridSize;
     }
@@ -56,6 +65,15 @@ public class Grid {
         for (int i = 0; i < gridSize; i++) {
             for (int j = 0; j < gridSize; j++) {
                 System.out.print(grid[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void printGridWithCoords() {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                System.out.print("[" + i + "," + j + "]" + grid[i][j] + " ");
             }
             System.out.println();
         }
@@ -82,6 +100,10 @@ public class Grid {
             }
         }
         return coords;
+    }
+
+    public boolean isSafe(Coord c) {
+        return c.getX() >= 0 && c.getX() < gridSize && c.getY() >= 0 && c.getY() < gridSize;
     }
 
 }

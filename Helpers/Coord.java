@@ -5,9 +5,9 @@ public class Coord {
     private int y;
     private int d;
 
-    public Coord(int x, int y) {
-        this.x = x;
+    public Coord(int y, int x) {
         this.y = y;
+        this.x = x;
         this.d = -1;
     }
 
@@ -37,7 +37,7 @@ public class Coord {
 
     @Override
     public String toString() {
-        return "[" + y + ", " + x + "]";
+        return "[" + y + "," + x + "]";
     }
 
     public boolean equals(Coord c) {
@@ -52,26 +52,27 @@ public class Coord {
         switch (direction) {
             // up
             case 0:
-                return new Coord(x, y - 1);
+                return new Coord(y - 1, x);
 
             // right
             case 1:
-                return new Coord(x + 1, y);
+                return new Coord(y, x + 1);
 
             // down
             case 2:
-                return new Coord(x, y + 1);
+                return new Coord(y + 1, x);
 
             // left
             case 3:
-                return new Coord(x - 1, y);
+                return new Coord(y, x - 1);
+
             default:
-                return new Coord(x, y);
+                return new Coord(y, x);
         }
     }
 
     public int[] getDifference(Coord c) {
-        return new int[] { x - c.getX(), y - c.getY() };
+        return new int[] { y - c.getY(), x - c.getX() };
     }
 
     public int getTotalDifference(Coord c) {
@@ -83,6 +84,6 @@ public class Coord {
     }
 
     public Coord addDistance(int[] diff) {
-        return new Coord(x + diff[0], y + diff[1]);
+        return new Coord(y + diff[0], x + diff[1]);
     }
 }

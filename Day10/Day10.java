@@ -1,9 +1,8 @@
 package Day10;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.io.File;
 
 import Helpers.Coord;
@@ -13,11 +12,11 @@ public class Day10 {
     public static void main(String[] args) {
         System.out.println("Hello, Advent of Code 2024: Day 10");
 
-        final int GRIDSZE = 8;
+        final int GRIDSZE = 45;
         Grid grid = new Grid(GRIDSZE);
         int[] directions = { 0, 1, 2, 3 };
 
-        try (Scanner scanner = new Scanner(new File("Day10/test.txt"))) {
+        try (Scanner scanner = new Scanner(new File("Day10/input.txt"))) {
 
             int i = 0;
             while (scanner.hasNextLine() && i < GRIDSZE) {
@@ -37,22 +36,26 @@ public class Day10 {
         System.out.println("Trail heads: " + trailHeads);
 
         int count = 0;
+        int rating = 0;
 
         for (Coord trailHead : trailHeads) {
-            System.out.println("Trail head: " + trailHead);
-            count += countTrails(grid, trailHead, '0', directions, new HashSet<Coord>());
+            int trailScore = countTrails(grid, trailHead, '0', directions, new ArrayList<String>());
+            count += trailScore;
+            rating += rateTrails(grid, trailHead, '0', directions);
         }
 
+        grid.printGridWithCoords();
+
         System.out.println("Number of trails: " + count);
+        System.out.println("Rating of trails: " + rating);
 
     }
 
     // depth first search for [0-9] in all four directions
-    static int countTrails(Grid grid, Coord start, char target, int[] directions, Set<Coord> visited) {
-        visited.add(start);
+    static int countTrails(Grid grid, Coord start, char target, int[] directions, List<String> visited) {
+        visited.add(start.toString());
 
         if (target == '9') {
-            System.out.println("Reached end");
             return 1;
         }
 
@@ -60,9 +63,26 @@ public class Day10 {
 
         for (int direction : directions) {
             Coord next = start.getAdjacentCoord(direction);
-            if (!visited.contains(next) && grid.getCell(next) == (char) (target + 1)) {
-                System.out.println("Found: " + grid.getCell(next) + " at " + next);
+            if (!visited.contains(next.toString()) && grid.getCell(next) == (char) (target + 1)) {
                 result += countTrails(grid, next, (char) (target + 1), directions, visited);
+            }
+        }
+
+        return result;
+    }
+
+    static int rateTrails(Grid grid, Coord start, char target, int[] directions) {
+
+        if (target == '9') {
+            return 1;
+        }
+
+        int result = 0;
+
+        for (int direction : directions) {
+            Coord next = start.getAdjacentCoord(direction);
+            if (grid.getCell(next) == (char) (target + 1)) {
+                result += rateTrails(grid, next, (char) (target + 1), directions);
             }
         }
 
