@@ -40,6 +40,17 @@ public class Coord {
         return "[" + y + "," + x + "]";
     }
 
+    @Override
+    public boolean equals(Object object) {
+        boolean sameSame = false;
+
+        if (object != null && object instanceof Coord) {
+            sameSame = this.x == ((Coord) object).x && this.y == ((Coord) object).y;
+        }
+
+        return sameSame;
+    }
+
     public boolean equals(Coord c) {
         return x == c.getX() && y == c.getY();
     }
