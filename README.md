@@ -2,7 +2,7 @@
 A place to hold my [Advent of Code 2024](https://adventofcode.com/2024) solutions.
 
 #### Day 1: Historian Hysteria
-Compare two lists, first find the total differences then the similarity (could of values that match)
+Compare two lists, first find the total differences then the similarity (count of values that match)
 - Task 1: 3574690
 - Task 2: 22565391
 
