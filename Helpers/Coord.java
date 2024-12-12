@@ -1,9 +1,12 @@
 package Helpers;
 
+import java.util.Map;
+
 public class Coord {
     private int x;
     private int y;
     private int d;
+    Map<String, Integer> directions = Map.of("up", 0, "right", 1, "down", 2, "left", 3);
 
     public Coord(int y, int x) {
         this.y = y;
@@ -82,6 +85,10 @@ public class Coord {
         }
     }
 
+    public Coord getAdjacentCoord(String direction) {
+        return getAdjacentCoord(directions.get(direction));
+    }
+
     public Coord[] getNeighbors() {
         Coord[] neighbors = new Coord[4];
         neighbors[0] = new Coord(y - 1, x);
@@ -105,5 +112,9 @@ public class Coord {
 
     public Coord addDistance(int[] diff) {
         return new Coord(y + diff[0], x + diff[1]);
+    }
+
+    public Coord step(int yDist, int xDist) {
+        return new Coord(y + yDist, x + xDist);
     }
 }

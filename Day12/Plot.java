@@ -9,8 +9,8 @@ public class Plot {
 
     private ArrayList<Coord> plotList;
     Coord startPoint;
-    private int area, perimeter;
-    char ch;
+    private int area, perimeter, sides;
+    public char ch;
 
     public Plot(Coord startPoint, char ch) {
         plotList = new ArrayList<Coord>();
@@ -44,8 +44,9 @@ public class Plot {
         return plotList.size();
     }
 
-    public void setArea() {
+    public int setArea() {
         this.area = plotList.size();
+        return area;
     }
 
     public int getPerimeter() {
@@ -103,6 +104,70 @@ public class Plot {
 
     public int getPrice() {
         return plotList.size() * perimeter;
+    }
+
+    public int getBulkPrice() {
+        return getSides() * setArea();
+    }
+
+    public int getSides() {
+        HashSet<String> allPlots = new HashSet<>();
+
+        sides = 0;
+
+        plotList.stream().forEach((c) -> {
+            allPlots.add(c.toString());
+        });
+
+        for (Coord c : plotList) {
+            Coord up = c.getAdjacentCoord(0);
+            Coord right = c.getAdjacentCoord(1);
+            Coord down = c.getAdjacentCoord(2);
+            Coord left = c.getAdjacentCoord(3);
+            Coord upLeft = c.step(-1, -1);
+            Coord upRight = c.step(-1, 1);
+            Coord downLeft = c.step(1, -1);
+            Coord downRight = c.step(1, 1);
+
+            // find sides by finding corners
+            if (!allPlots.contains(up.toString()) && !allPlots.contains(left.toString())) {
+                sides++;
+            }
+
+            if (!allPlots.contains(up.toString()) && !allPlots.contains(right.toString())) {
+                sides++;
+            }
+
+            if (!allPlots.contains(down.toString()) && !allPlots.contains(right.toString())) {
+                sides++;
+            }
+
+            if (!allPlots.contains(down.toString()) && !allPlots.contains(left.toString())) {
+                sides++;
+            }
+
+            if (allPlots.contains(up.toString())) {
+                if (allPlots.contains(left.toString()) && !allPlots.contains(upLeft.toString())) {
+                    sides++;
+                }
+
+                if (allPlots.contains(right.toString()) && !allPlots.contains(upRight.toString())) {
+                    sides++;
+                }
+            }
+
+            if (allPlots.contains(down.toString())) {
+                if (allPlots.contains(left.toString()) && !allPlots.contains(downLeft.toString())) {
+                    sides++;
+                }
+
+                if (allPlots.contains(right.toString()) && !allPlots.contains(downRight.toString())) {
+                    sides++;
+                }
+            }
+        }
+
+        return sides;
     }
 
 }

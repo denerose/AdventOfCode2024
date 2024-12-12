@@ -22,6 +22,7 @@ public class Day12 {
         HashSet<String> counted = new HashSet<String>();
 
         int totalCost = 0;
+        int bulkCost = 0;
 
         readInput(gardenGrid);
 
@@ -40,6 +41,12 @@ public class Day12 {
         }
 
         System.out.println("Total cost: " + totalCost);
+
+        for (Plot plot : allPlots) {
+            bulkCost += plot.getBulkPrice();
+        }
+
+        System.out.println("Bulk cost: " + bulkCost);
 
     }
 
