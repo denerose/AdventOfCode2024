@@ -10,7 +10,7 @@ public class Day13 {
 
     // Read input from file
     public static void readInput() {
-        try (Scanner scanner = new Scanner(new File("Day10/input.txt"))) {
+        try (Scanner scanner = new Scanner(new File("Day13/input.txt"))) {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
