@@ -57,6 +57,15 @@ public class Grid {
         return Character.getNumericValue(getCell(c));
     }
 
+    public Coord[] getNeighbors(Coord c) {
+        Coord[] neighbors = new Coord[4];
+        neighbors[0] = (c.getY() - 1 > 0) ? new Coord(c.getX(), c.getY() - 1) : null;
+        neighbors[1] = (c.getX() + 1 < gridSize) ? new Coord(c.getX() + 1, c.getY()) : null;
+        neighbors[2] = (c.getY() + 1 < gridSize) ? new Coord(c.getX(), c.getY() + 1) : null;
+        neighbors[3] = (c.getX() - 1 > 0) ? new Coord(c.getX() - 1, c.getY()) : null;
+        return neighbors;
+    }
+
     public int size() {
         return gridSize;
     }

@@ -82,6 +82,15 @@ public class Coord {
         }
     }
 
+    public Coord[] getNeighbors() {
+        Coord[] neighbors = new Coord[4];
+        neighbors[0] = new Coord(y - 1, x);
+        neighbors[1] = new Coord(y, x + 1);
+        neighbors[2] = new Coord(y + 1, x);
+        neighbors[3] = new Coord(y, x - 1);
+        return neighbors;
+    }
+
     public int[] getDifference(Coord c) {
         return new int[] { y - c.getY(), x - c.getX() };
     }

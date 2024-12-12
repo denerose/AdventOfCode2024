@@ -84,8 +84,8 @@ Then I realised the stones don't need to stay in order (hurrah) to calculate the
 
 I am now storing the count (as the value) of each distinct number (as the key) in a Hashmap rather than an ArrayList. I'm also only calculating the permutation result for each distinct value once and storing the resulting iteration in a separate hashmap with initial long number (key) and a `long[]` (value) for the resulting stones.
 
-#### Day 12
-- Task 1:
+#### Day 12: Garden Groups
+- Task 1: 1387004
 - Task 2:
 
 #### Day 13
