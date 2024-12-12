@@ -2,10 +2,8 @@ package Day11;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import java.io.File;
-import java.lang.reflect.Array;
 
 public class Day11 {
     public static void main(String[] args) {
@@ -59,10 +57,8 @@ public class Day11 {
             }
         }
         if (counter == 1) {
-            System.out.println("Counter: " + counter + ". Stones: " + newStones.size());
             return newStones;
         } else {
-            System.out.println("Counter: " + counter + ". Stones: " + newStones.size());
             return blink(newStones, counter - 1);
         }
 
@@ -124,10 +120,8 @@ public class Day11 {
         });
 
         if (counter == 1) {
-            System.out.println("Counter: " + counter + ". Nums: " + newStones.size());
             return newStones;
         } else {
-            System.out.println("Counter: " + counter + ". Nums: " + newStones.size());
             return blinkBetter(newStones, counter - 1, calculations);
         }
 

@@ -41,7 +41,9 @@ Grid traversal then find some traversal loops.
 - Task 1: 4647
 - Task 2: 1723
 
-Traversing the grind and finding the first set of paths was easy enough, like a much more simplified pathing calculation for a game and I used the same logic I would for that. For part 2, I just updated the 'map' (my grid) to add the obstacles in each place on the original path. I finally read up on DPS after completing this, but turns out that's basically what I did here. My main hurdle on this was when I realised she could get stuck in a cycle that didn't involve the new obstacle, but checking the 'visited' list fixes that.
+Traversing the grind and finding the first set of paths was easy enough, like a much more simplified pathing calculation for a game and I used the same logic I would for that. For part 2, I just updated the 'map' (my grid) to add the obstacles in each place on the original path. 
+
+I finally read up on DFS (depth first search) for grids after completing this, but turns out that's basically what I did here and now I know it this will be helpful in future. My main hurdle on this was when I realised she could get stuck in a cycle that didn't involve the new obstacle, but re-checking the 'visited' list for my valid break condition fixes that.
 
 #### Day 7: Bridge Repair
 The day elephants stole our equation operators. Check if sum can be solved (left to right) with limited operation list.
@@ -76,7 +78,11 @@ The day we had to count many many many permutations of magic stones.
 - Task 1: 198089
 - Task 2: 236302670835517
 
-Today I learned about *dynamic programming*. My somewhat naive solution for part 1 was never going to work for part 2, ArrayLists can't more than int.MAX_VALUE items. Then I realised the stones don't need to stay in order, I only need to know how many there are of each value to figure out the next iteration, from there it was my old mates Hashmap and stream() to the rescue.
+Today I learned about *dynamic programming* and have thought more about the *heap* allocation in Java than ever before. My somewhat naive solution for part 1 was never going to work for part 2, ArrayLists can't more than int.MAX_VALUE items and my final count is much higher but I was getting heap overflow errors before then anyway. 
+
+Then I realised the stones don't need to stay in order (hurrah) to calculate the next iterations, so I only need to know how many there are of each value to figure out the next iteration, from there it was my old mates `Hashmap` and `stream()` to the rescue for a more memory efficient solution. 
+
+I am now storing the count (as the value) of each distinct number (as the key) in a Hashmap rather than an ArrayList. I'm also only calculating the permutation result for each distinct value once and storing the resulting iteration in a separate hashmap with initial long number (key) and a `long[]` (value) for the resulting stones.
 
 #### Day 12
 - Task 1:
