@@ -105,7 +105,7 @@ The day with the robots.
 - Task 1: 228410028
 - Task 2:
 
-For some reason my regex and scanner combo skills failed me today and I spent hours fluffing about to get the input file parsed.
+For some reason my regex and scanner combo skills failed me today and I spent hours fluffing about to get the input file parsed and ended up just substring and splitting it in the end.
 
 #### Day 15
 - Task 1:

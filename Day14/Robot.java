@@ -79,6 +79,10 @@ public class Robot {
         return position;
     }
 
+    public Coord getPosition() {
+        return position;
+    }
+
     @Override
     public String toString() {
         return "Robot [position=" + position + ", startCoord=" + startCoord + ", velocity=" + velocity + "]";

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Helpers.Coord;
+import Helpers.Grid;
 
 import java.io.File;
 
@@ -21,7 +22,6 @@ public class Day14 {
 
         for (Robot robot : robots) {
             Coord loc = robot.move(100);
-            System.out.println("Robot at " + loc);
             if (loc.getX() > midX && loc.getY() > midY) {
                 Q4++;
             } else if (loc.getX() > midX && loc.getY() < midY) {
@@ -34,8 +34,50 @@ public class Day14 {
 
         }
 
-        System.out.println(Q1 * Q2 * Q3 * Q4);
+        System.out.println("\nPart 1 = " + (Q1 * Q2 * Q3 * Q4));
 
+        System.out.println("\nResetting robots...");
+        for (Robot robot : robots) {
+            robot.reset();
+        }
+
+        Grid grid = new Grid(maxY, 103);
+        for (Robot robot : robots) {
+            grid.setCell(robot.getStartCoord(), '#');
+        }
+
+        System.out.println("Starting simulation...");
+        Scanner sysIn = new Scanner(System.in);
+
+        int seconds = findTree(robots, grid, maxX, maxY);
+
+        System.out.println("\nPart 2 = " + seconds);
+    }
+
+    static int findTree(ArrayList<Robot> robots, Grid grid, int maxX, int maxY) {
+        int seconds = 0;
+
+        while (true) {
+            for (Robot robot : robots) {
+                Coord pos = robot.getPosition();
+                Coord loc = robot.move(1);
+                grid.setCell(loc, '#');
+                grid.setCell(pos, '.');
+            }
+
+            seconds++;
+
+            // Check for a block of robots is in the middle position, if found break
+            if (grid.getMidCell() == '#' && grid.getCell((maxY / 2), (maxX / 2) + 2) == '#'
+                    && grid.getCell((maxY / 2) + 2, (maxX / 2)) == '#'
+                    && grid.getCell((maxY / 2) - 2, (maxX / 2)) == '#'
+                    && grid.getCell((maxY / 2), (maxX / 2) - 2) == '#') {
+                grid.printGrid();
+                break;
+            }
+        }
+
+        return seconds;
     }
 
     // Read input from file
