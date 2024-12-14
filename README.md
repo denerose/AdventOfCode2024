@@ -100,9 +100,12 @@ The day with the very special CLAW machines.
 
 Much googling of linear algebra, and some reliance on co-pilot to translate mathematical descriptions into code, but eventually we got there. Scanning the input and forgetting about the blank line between machines also took much longer than it should have! Renaming my variables from aX, bY to a1, a2, b1, b2 etc also helped me get my head around what var went where in the actual equations - tricked that dyslexic brain!
 
-#### Day 14
-- Task 1:
+#### Day 14: Restroom Redoubt
+The day with the robots.
+- Task 1: 228410028
 - Task 2:
+
+For some reason my regex and scanner combo skills failed me today and I spent hours fluffing about to get the input file parsed.
 
 #### Day 15
 - Task 1:
