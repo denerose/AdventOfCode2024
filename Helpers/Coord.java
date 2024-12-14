@@ -114,7 +114,19 @@ public class Coord {
         return new Coord(y + diff[0], x + diff[1]);
     }
 
+    public Coord addDistance(int yDist, int xDist) {
+        return new Coord(y + yDist, x + xDist);
+    }
+
+    public Coord addDistance(Coord c) {
+        return new Coord(y + c.getY(), x + c.getX());
+    }
+
     public Coord step(int yDist, int xDist) {
         return new Coord(y + yDist, x + xDist);
+    }
+
+    public int findSlope(Coord c) {
+        return (c.getY() - y) / (c.getX() - x);
     }
 }

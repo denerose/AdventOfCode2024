@@ -87,13 +87,18 @@ I am now storing the count (as the value) of each distinct number (as the key) i
 #### Day 12: Garden Groups
 The one where we count contagious char blocks on a grid... I mean garden plots!
 - Task 1: 1387004
-- Task 2:
+- Task 2: 844198
 
-Today I learned *breadth first search*!
+Today I learned *breadth first search*! 
+
+I also counted the 'sides' for Part 2 by finding corners on my existing mapped area (using a custom 'Plot' class because I misread the wording of the questions initially). The `equals()` override on my Coord object continues to be problematic for `contains()` checks, but converting `toString()` and comparing the strings works for now.
 
 #### Day 13
-- Task 1:
+The day with the very special CLAW machines.
+- Task 1: 38714
 - Task 2:
+
+Much googling of linear algebra, and some reliance on co-pilot to translate mathematical descriptions into code, but eventually we got there. Scanning the input and forgetting about the blank line between machines also took much longer than it should have!
 
 #### Day 14
 - Task 1:
