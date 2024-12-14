@@ -103,9 +103,13 @@ Much googling of linear algebra, and some reliance on co-pilot to translate math
 #### Day 14: Restroom Redoubt
 The day with the robots.
 - Task 1: 228410028
-- Task 2:
+- Task 2: 8258
 
 For some reason my regex and scanner combo skills failed me today and I spent hours fluffing about to get the input file parsed and ended up just substring and splitting it in the end.
+
+Part 1 just required my custom Robot class to estimate steps. I am glad that I decided to step individually through `i < seconds` even though I suspected just multiplying the traversals would be quicker. 
+
+Part 2 was a nice surprised despite the needless foundations for various possible further optimizations. Good old Grid class to the rescue (with a few updates I considered at the start and did end up needing anyway). I just searched for a block of robots at the middle of the grid, but had prepped to allow for multiple re-iterations. Found the tree on the first go through and didn't need to improve the grid by counting robots or allowing for any further loops which was a lucky bonus from my particular input and test condition.
 
 #### Day 15
 - Task 1:

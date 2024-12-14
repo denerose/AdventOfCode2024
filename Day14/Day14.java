@@ -51,6 +51,15 @@ public class Day14 {
 
         int seconds = findTree(robots, grid, maxX, maxY);
 
+        System.out.println("Simulation complete... Keep this grid? (y/n)");
+        String input = sysIn.nextLine();
+
+        while (!input.equals("y") && !input.equals("Y")) {
+            seconds += findTree(robots, grid, maxX, maxY);
+            System.out.println("Simulation complete... Keep this grid? (y/n)");
+            input = sysIn.nextLine();
+        }
+
         System.out.println("\nPart 2 = " + seconds);
     }
 
@@ -62,7 +71,7 @@ public class Day14 {
                 Coord pos = robot.getPosition();
                 Coord loc = robot.move(1);
                 grid.setCell(loc, '#');
-                grid.setCell(pos, '.');
+                grid.setCell(pos, ' ');
             }
 
             seconds++;
