@@ -10,7 +10,7 @@ import java.io.File;
 
 public class Day14 {
     public static void main(String[] args) {
-        System.out.println("Hello, Advent of Code 2024: Day 10");
+        System.out.println("Hello, Advent of Code 2024: Day 14");
 
         ArrayList<Robot> robots = new ArrayList<>();
 
@@ -41,7 +41,7 @@ public class Day14 {
             robot.reset();
         }
 
-        Grid grid = new Grid(maxY, 103);
+        Grid grid = new Grid(maxY, maxX);
         for (Robot robot : robots) {
             grid.setCell(robot.getStartCoord(), '#');
         }

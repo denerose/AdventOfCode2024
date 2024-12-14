@@ -14,7 +14,7 @@ import java.io.File;
 
 public class Day12 {
     public static void main(String[] args) {
-        System.out.println("Hello, Advent of Code 2024: Day 10");
+        System.out.println("Hello, Advent of Code 2024: Day 12");
 
         final int GRIDSIZE = 140;
         Grid gardenGrid = new Grid(GRIDSIZE);

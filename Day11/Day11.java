@@ -7,7 +7,7 @@ import java.io.File;
 
 public class Day11 {
     public static void main(String[] args) {
-        System.out.println("Hello, Advent of Code 2024: Day 10");
+        System.out.println("Hello, Advent of Code 2024: Day 11");
 
         ArrayList<Long> stones = new ArrayList<>(104739000);
         readInput(stones);
