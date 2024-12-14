@@ -18,16 +18,24 @@ public class Day13 {
 
         readInput(machines);
 
-        long totalTokens = 0;
+        long totalPart1 = 0;
+        long totalPart2 = 0;
 
         for (String key : machines.keySet()) {
             Coord[] coords = machines.get(key);
             long result = solve(coords[0], coords[1], coords[2]);
-            totalTokens += result;
-            System.out.println("Machine: " + key + " Result: " + result);
+            totalPart1 += result;
         }
 
-        System.out.println("Total Tokens: " + totalTokens);
+        System.out.println("Part 1: " + totalPart1);
+
+        for (String key : machines.keySet()) {
+            Coord[] coords = machines.get(key);
+            long result = solve2(coords[0], coords[1], coords[2]);
+            totalPart2 += result;
+        }
+
+        System.out.println("Part 2: " + totalPart2);
 
     }
 
@@ -41,6 +49,28 @@ public class Day13 {
         long b2 = b.getY();
         long p1 = p.getX();
         long p2 = p.getY();
+
+        long den = a1 * b2 - b1 * a2;
+        long A = b2 * p1 - b1 * p2;
+        long B = a1 * p2 - a2 * p1;
+
+        if (A % den == 0 && B % den == 0) {
+            return (3 * A + B) / den;
+        }
+
+        return 0;
+    }
+
+    static long solve2(Coord a, Coord b, Coord p) {
+
+        // Find denominator in inverse of 2x2 Matrix
+
+        long a1 = a.getX();
+        long a2 = a.getY();
+        long b1 = b.getX();
+        long b2 = b.getY();
+        long p1 = p.getX() + 10000000000000l;
+        long p2 = p.getY() + 10000000000000l;
 
         long den = a1 * b2 - b1 * a2;
         long A = b2 * p1 - b1 * p2;
