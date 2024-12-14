@@ -47,9 +47,13 @@ public class Day13 {
         long p1 = p.getX();
         long p2 = p.getY();
 
+        // find the denominator, and work out slopes of A and B with respect to prize
+
         long den = a1 * b2 - b1 * a2;
         long A = b2 * p1 - b1 * p2;
         long B = a1 * p2 - a2 * p1;
+
+        // if A and B are divisible by the denominator, then the point is on the line
 
         if (A % den == 0 && B % den == 0) {
             return (3 * A + B) / den;

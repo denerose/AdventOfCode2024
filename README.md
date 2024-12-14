@@ -50,7 +50,7 @@ The day elephants stole our equation operators. Check if sum can be solved (left
 - Task 1: 8401132154762
 - Task 2: 95297119227552
 
-This one felt too easy but in a good way. Part two only required adding two lines of code because I had a suspicion that I would end up having to add additional operators to the part 1 check. 
+This one felt too easy but in a good way. Part two only required adding two lines of code because I had a suspicion that I would end up having to add additional operators to the part 1 check. Building my cute little Calibration Equation class probably took longer than coding up the solver.
 
 #### Day 8: Resonant Collinearity
 The day we had to calculate the grid positions of 'antinodes' based on pairs of 'antennae' (chars in the grid).
@@ -60,7 +60,7 @@ The day we had to calculate the grid positions of 'antinodes' based on pairs of 
 This is another one where I knew what I wanted the solution to be but spent a lot of time debugging + vs - and traversed the wrong direction for a while.
 
 #### Day 9: Disk Fragmenter
-The day we defragged (re-frag?) an imaginary hardrive for a very eccentric crustacean then multiplied the result.
+The day we defragged (re-frag?) an imaginary hardrive for a very eccentric crustacean then multiplied the stored values by their resulting locations.
 - Task 1: 6390180901651
 - Task 2: 6412390114238
 
@@ -93,7 +93,7 @@ Today I learned *breadth first search*!
 
 I also counted the 'sides' for Part 2 by finding corners on my existing mapped area (using a custom 'Plot' class because I misread the wording of the questions initially). The `equals()` override on my Coord object continues to be problematic for `contains()` checks, but converting `toString()` and comparing the strings works for now.
 
-#### Day 13
+#### Day 13: Claw Contraption
 The day with the very special CLAW machines.
 - Task 1: 38714
 - Task 2: 74015623345775
