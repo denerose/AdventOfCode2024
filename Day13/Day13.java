@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import Helpers.Coord;
 
 import java.io.File;
-import java.math.BigInteger;
 
 public class Day13 {
     public static void main(String[] args) {
@@ -41,8 +40,6 @@ public class Day13 {
 
     static long solve(Coord a, Coord b, Coord p) {
 
-        // Find denominator in inverse of 2x2 Matrix
-
         long a1 = a.getX();
         long a2 = a.getY();
         long b1 = b.getX();
@@ -62,8 +59,6 @@ public class Day13 {
     }
 
     static long solve2(Coord a, Coord b, Coord p) {
-
-        // Find denominator in inverse of 2x2 Matrix
 
         long a1 = a.getX();
         long a2 = a.getY();

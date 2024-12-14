@@ -96,9 +96,9 @@ I also counted the 'sides' for Part 2 by finding corners on my existing mapped a
 #### Day 13
 The day with the very special CLAW machines.
 - Task 1: 38714
-- Task 2:
+- Task 2: 74015623345775
 
-Much googling of linear algebra, and some reliance on co-pilot to translate mathematical descriptions into code, but eventually we got there. Scanning the input and forgetting about the blank line between machines also took much longer than it should have!
+Much googling of linear algebra, and some reliance on co-pilot to translate mathematical descriptions into code, but eventually we got there. Scanning the input and forgetting about the blank line between machines also took much longer than it should have! Renaming my variables from aX, bY to a1, a2, b1, b2 etc also helped me get my head around what var went where in the actual equations - tricked that dyslexic brain!
 
 #### Day 14
 - Task 1:
