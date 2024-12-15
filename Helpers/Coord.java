@@ -14,6 +14,12 @@ public class Coord {
         this.d = -1;
     }
 
+    public Coord(int y, int x, int direction) {
+        this.y = y;
+        this.x = x;
+        this.d = direction;
+    }
+
     public int getX() {
         return x;
     }
@@ -40,7 +46,10 @@ public class Coord {
 
     @Override
     public String toString() {
-        return "[" + y + "," + x + "]";
+        if (d < 0) {
+            return "[" + y + "," + x + "]";
+        }
+        return "[" + y + "," + x + "," + d + "]";
     }
 
     @Override
