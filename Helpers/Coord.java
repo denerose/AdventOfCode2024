@@ -6,7 +6,9 @@ public class Coord {
     private int x;
     private int y;
     private int d;
-    Map<String, Integer> directions = Map.of("up", 0, "right", 1, "down", 2, "left", 3);
+    Map<String, Integer> directions = Map.of("up", 0, "right", 1, "down", 2, "left", 3, "diagUpRight", 4,
+            "diagDownRight", 5,
+            "diagDownLeft", 6, "diagUpLeft", 7);
 
     public Coord(int y, int x) {
         this.y = y;
@@ -88,6 +90,22 @@ public class Coord {
             // left
             case 3:
                 return new Coord(y, x - 1);
+
+            // diagUpRight
+            case 4:
+                return new Coord(y - 1, x + 1);
+
+            // diagDownRight
+            case 5:
+                return new Coord(y + 1, x + 1);
+
+            // diagDownLeft
+            case 6:
+                return new Coord(y + 1, x - 1);
+
+            // diagUpLeft
+            case 7:
+                return new Coord(y - 1, x - 1);
 
             default:
                 return new Coord(y, x);
