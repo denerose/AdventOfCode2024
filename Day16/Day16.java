@@ -5,7 +5,7 @@ import java.io.File;
 
 public class Day16 {
     public static void main(String[] args) {
-        System.out.println("Hello, Advent of Code 2024: Day 10");
+        System.out.println("Hello, Advent of Code 2024: Day 16");
     }
 
     // Read input from file

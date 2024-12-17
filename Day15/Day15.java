@@ -12,7 +12,7 @@ public class Day15 {
     public static void main(String[] args) {
         System.out.println("Hello, Advent of Code 2024: Day 15");
 
-        final int GRIDSIZE = 10;
+        final int GRIDSIZE = 50;
         Grid grid = new Grid(GRIDSIZE, GRIDSIZE);
         ArrayList<Integer> robotMoves = new ArrayList<Integer>();
 
@@ -230,7 +230,7 @@ public class Day15 {
                         && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
                     return true;
                 } else if (grid.getCell(next1) == '[' && grid.getCell(next2) == ']'
-                        && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
+                        && canMoveBigBox(next1, grid, direction)) {
                     return true;
                 }
             }
@@ -247,7 +247,7 @@ public class Day15 {
     public static void readInput(Grid grid, ArrayList<Integer> robotMoves) {
 
         // Read the map
-        try (Scanner scanner = new Scanner(new File("Day15/testmap.txt"))) {
+        try (Scanner scanner = new Scanner(new File("Day15/map.txt"))) {
             int i = 0;
             while (scanner.hasNextLine() && i < grid.getMaxY()) {
                 String line = scanner.nextLine();
@@ -261,7 +261,7 @@ public class Day15 {
         }
 
         // Read the robot moves
-        try (Scanner scanner = new Scanner(new File("Day15/test.txt"))) {
+        try (Scanner scanner = new Scanner(new File("Day15/input.txt"))) {
 
             scanner.useDelimiter("");
             while (scanner.hasNext()) {
