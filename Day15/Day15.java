@@ -72,12 +72,14 @@ public class Day15 {
                     grid.setCell(next, '@');
                     robot = next;
                 } else if ((move == 1 || move == 3) && (grid.getCell(next) == '[' || grid.getCell(next) == ']')
-                        && moveBigBoxX(next, grid, move)) {
+                        && canMoveBigBox(next, grid, move)) {
+                    moveBigBox(next, grid, move);
                     grid.setCell(robot, '.');
                     grid.setCell(next, '@');
                     robot = next;
                 } else if ((move == 0 || move == 2) && (grid.getCell(next) == '[' || grid.getCell(next) == ']')
-                        && moveBigBoxY(next, grid, move)) {
+                        && canMoveBigBox(next, grid, move)) {
+                    moveBigBox(next, grid, move);
                     grid.setCell(robot, '.');
                     grid.setCell(next, '@');
                     robot = next;
@@ -106,62 +108,133 @@ public class Day15 {
         return false;
     }
 
-    static boolean moveBigBoxX(Coord box1, Grid grid, int direction) {
-        Coord box2 = box1.getAdjacentCoord(direction);
-        Coord next1 = box2.getAdjacentCoord(direction);
-        Coord next2 = next1.getAdjacentCoord(direction);
-        if (grid.isSafe(next1)) {
-            if (grid.getCell(next1) == '.' && grid.getCell(next2) == '.') {
-                grid.setCell(next1, grid.getCell(box2));
-                grid.setCell(box2, grid.getCell(box1));
-                grid.setCell(box1, '.');
-                return true;
-            } else if ((grid.getCell(next1) == '[' || grid.getCell(next1) == ']')
-                    && moveBigBoxX(next1, grid, direction)) {
-                grid.setCell(next1, grid.getCell(box2));
-                grid.setCell(box2, grid.getCell(box1));
-                grid.setCell(box1, '.');
-                return true;
+    static void moveBigBox(Coord box1, Grid grid, int direction) {
+        if (direction == 3) {
+            // box is moving left
+            Coord box2 = box1.getAdjacentCoord(direction);
+            Coord next = box2.getAdjacentCoord(direction);
+            if (grid.isSafe(next)) {
+                if (grid.getCell(next) == '.') {
+                    grid.setCell(box1, '.');
+                    grid.setCell(box2, ']');
+                    grid.setCell(next, '[');
+                } else if (grid.getCell(next) == ']' && canMoveBigBox(next, grid, direction)) {
+                    moveBigBox(next, grid, direction);
+                    grid.setCell(next, grid.getCell(box2));
+                    grid.setCell(box2, grid.getCell(box1));
+                    grid.setCell(box1, '.');
+                }
             }
+
+        } else if (direction == 1) {
+            // box is moving right
+            Coord box2 = box1.getAdjacentCoord(direction);
+            Coord next = box2.getAdjacentCoord(direction);
+            if (grid.isSafe(next)) {
+                if (grid.getCell(next) == '.') {
+                    grid.setCell(box1, '.');
+                    grid.setCell(box2, '[');
+                    grid.setCell(next, ']');
+                } else if (grid.getCell(next) == '[' && canMoveBigBox(next, grid, direction)) {
+                    moveBigBox(next, grid, direction);
+                    grid.setCell(next, grid.getCell(box2));
+                    grid.setCell(box2, grid.getCell(box1));
+                    grid.setCell(box1, '.');
+                }
+            }
+
+        } else if (direction == 0 || direction == 2) {
+            // box is moving up or down
+            Coord box2 = (grid.getCell(box1) == '[') ? box1.getAdjacentCoord(1) : box1.getAdjacentCoord(3);
+            Coord next1 = box1.getAdjacentCoord(direction);
+            Coord next2 = box2.getAdjacentCoord(direction);
+
+            if (grid.isSafe(next1) && grid.isSafe(next2)) {
+                if (grid.getCell(next1) == '#' || grid.getCell(next2) == '#') {
+                    return;
+                }
+
+                if (grid.getCell(next1) == '.' && grid.getCell(next2) == '.') {
+                    grid.setCell(next1, grid.getCell(box1));
+                    grid.setCell(next2, grid.getCell(box2));
+                    grid.setCell(box1, '.');
+                    grid.setCell(box2, '.');
+                } else if (grid.getCell(next1) == ']' && grid.getCell(next2) == '['
+                        && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
+                    moveBigBox(next1, grid, direction);
+                    moveBigBox(next2, grid, direction);
+                    grid.setCell(next1, grid.getCell(box1));
+                    grid.setCell(next2, grid.getCell(box2));
+                    grid.setCell(box1, '.');
+                    grid.setCell(box2, '.');
+                } else if (grid.getCell(next1) == '[' && grid.getCell(next2) == ']'
+                        && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
+                    moveBigBox(next1, grid, direction);
+                    moveBigBox(next2, grid, direction);
+                    grid.setCell(next1, grid.getCell(box1));
+                    grid.setCell(next2, grid.getCell(box2));
+                    grid.setCell(box1, '.');
+                    grid.setCell(box2, '.');
+                }
+            }
+
         }
-        return false;
     }
 
-    static boolean moveBigBoxY(Coord box1, Grid grid, int direction) {
-        Coord box2 = (grid.getCell(box1) == '[') ? box1.getAdjacentCoord("right") : box1.getAdjacentCoord("left");
-        Coord next1 = box1.getAdjacentCoord(direction);
-        Coord next2 = box2.getAdjacentCoord(direction);
-        if (grid.isSafe(next1)) {
-            if (grid.getCell(next1) == '.' && grid.getCell(next2) == '.') {
-                grid.setCell(next1, grid.getCell(box1));
-                grid.setCell(next2, grid.getCell(box2));
-                grid.setCell(box1, '.');
-                grid.setCell(box2, '.');
-                return true;
-            } else if ((grid.getCell(next1) == grid.getCell(box1))
-                    && moveBigBoxY(next1, grid, direction)) {
-                grid.setCell(next1, grid.getCell(box1));
-                grid.setCell(next2, grid.getCell(box2));
-                grid.setCell(box1, '.');
-                grid.setCell(box2, '.');
-                return true;
-            } else if ((grid.getCell(next1) == ']' && (grid.getCell(next2) == '.'
-                    || (grid.getCell(next2) == '[' && moveBigBoxY(next2, grid, direction))))
-                    && moveBigBoxY(next1.getAdjacentCoord("left"), grid, direction)) {
-                grid.setCell(next1, grid.getCell(box1));
-                grid.setCell(next2, grid.getCell(box2));
-                grid.setCell(box1, '.');
-                grid.setCell(box2, '.');
-                return true;
-            } else if ((grid.getCell(next1) == '[' && (grid.getCell(next2) == '.'
-                    || (grid.getCell(next2) == ']' && moveBigBoxY(next2, grid, direction))))
-                    && moveBigBoxY(next1.getAdjacentCoord("right"), grid, direction)) {
-                grid.setCell(next1, grid.getCell(box1));
-                grid.setCell(next2, grid.getCell(box2));
-                grid.setCell(box1, '.');
-                grid.setCell(box2, '.');
-                return true;
+    static boolean canMoveBigBox(Coord box, Grid grid, int direction) {
+        if (direction == 3) {
+            // box is moving left
+            Coord box2 = box.getAdjacentCoord(direction);
+            Coord next = box2.getAdjacentCoord(direction);
+            if (grid.isSafe(next)) {
+                if (grid.getCell(next) == '#') {
+                    return false;
+                }
+
+                if (grid.getCell(next) == '.') {
+                    return true;
+                } else if (grid.getCell(next) == ']' && canMoveBigBox(next, grid, direction)) {
+                    return true;
+                }
             }
+        } else if (direction == 1) {
+            // box is moving right
+            Coord box2 = box.getAdjacentCoord(direction);
+            Coord next = box2.getAdjacentCoord(direction);
+            if (grid.isSafe(next)) {
+                if (grid.getCell(next) == '#') {
+                    return false;
+                }
+
+                if (grid.getCell(next) == '.') {
+                    return true;
+                } else if (grid.getCell(next) == '[' && canMoveBigBox(next, grid, direction)) {
+                    return true;
+                }
+            }
+
+        } else if (direction == 0 || direction == 2) {
+            // box is moving up or down
+            Coord box2 = (grid.getCell(box) == '[') ? box.getAdjacentCoord(1) : box.getAdjacentCoord(3);
+            Coord next1 = box.getAdjacentCoord(direction);
+            Coord next2 = box2.getAdjacentCoord(direction);
+
+            if (grid.isSafe(next1) && grid.isSafe(next2)) {
+                if (grid.getCell(next1) == '#' || grid.getCell(next2) == '#') {
+                    return false;
+                }
+
+                if (grid.getCell(next1) == '.' && grid.getCell(next2) == '.') {
+                    return true;
+                } else if (grid.getCell(next1) == ']' && grid.getCell(next2) == '['
+                        && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
+                    return true;
+                } else if (grid.getCell(next1) == '[' && grid.getCell(next2) == ']'
+                        && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
+                    return true;
+                }
+            }
+
         }
         return false;
     }

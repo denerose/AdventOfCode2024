@@ -112,10 +112,19 @@ Part 1 just required my custom Robot class to estimate steps. I am glad that I d
 Part 2 was a nice surprised despite the needless foundations for various possible further optimizations. Good old Grid class to the rescue (with a few updates I considered at the start and did end up needing anyway). I just searched for a block of robots at the middle of the grid, but had prepped to allow for multiple re-iterations. Found the tree on the first go through and didn't need to improve the grid by counting robots or allowing for any further loops which was a lucky bonus from my particular input and test condition.
 
 #### Day 15: Warehouse Woes
+Of lanternfish and robots! More path mapping and box prediction.
 - Task 1: 1577255
 - Task 2:
 
-#### Day 16
+I was busy Sunday. My initial solution worked great for Part 1 but did need some debugging due to forgetting to actually move the robot for a standard step. Once I saw the single missing line thing fell into place. 
+
+For Part 2, I spent a lot of time fussing with creating the big version of the grid. Actually moving the boxes should be a minor (if fiddly) adjustment to grab the correct two `[]` halves and allow for the `][` middle push - this should be helped because the original solution was already recursive. Once again, debugging my own typos and mistakes takes longer than it should! Hardest part was wrapping my dyslexic brain around left and right.
+
+Part 2 UPDATE: currently working on test input but not full input. Need to refactor to make 'checkBoxMove' and 'moveBox' separate methods. Returning to debug after Day 16.
+
+#### Day 16: Reindeer Maze
+Help some reindeer find the shortest point value paths on a grid. Hello Dijkstra’s shortest path algorithm!
+
 - Task 1:
 - Task 2:
 
