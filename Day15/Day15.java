@@ -159,7 +159,15 @@ public class Day15 {
                     grid.setCell(next2, grid.getCell(box2));
                     grid.setCell(box1, '.');
                     grid.setCell(box2, '.');
-                } else if (grid.getCell(next1) == ']' && grid.getCell(next2) == '['
+                } else if (grid.getCell(next1) == grid.getCell(box1) && grid.getCell(next2) == grid.getCell(box2)
+                        && canMoveBigBox(next1, grid, direction)) {
+                    moveBigBox(next1, grid, direction);
+                    grid.setCell(next1, grid.getCell(box1));
+                    grid.setCell(next2, grid.getCell(box2));
+                    grid.setCell(box1, '.');
+                    grid.setCell(box2, '.');
+                } else if (((grid.getCell(next1) == ']' && grid.getCell(next2) == '[')
+                        || (grid.getCell(next1) == '[' && grid.getCell(next2) == ']'))
                         && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
                     moveBigBox(next1, grid, direction);
                     moveBigBox(next2, grid, direction);
@@ -171,6 +179,20 @@ public class Day15 {
                         && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
                     moveBigBox(next1, grid, direction);
                     moveBigBox(next2, grid, direction);
+                    grid.setCell(next1, grid.getCell(box1));
+                    grid.setCell(next2, grid.getCell(box2));
+                    grid.setCell(box1, '.');
+                    grid.setCell(box2, '.');
+                } else if (grid.getCell(next1) == '.' && grid.getCell(next2) == grid.getCell(box1)
+                        && canMoveBigBox(next2, grid, direction)) {
+                    moveBigBox(next2, grid, direction);
+                    grid.setCell(next1, grid.getCell(box1));
+                    grid.setCell(next2, grid.getCell(box2));
+                    grid.setCell(box1, '.');
+                    grid.setCell(box2, '.');
+                } else if (grid.getCell(next2) == '.' && grid.getCell(next1) == grid.getCell(box2)
+                        && canMoveBigBox(next1, grid, direction)) {
+                    moveBigBox(next1, grid, direction);
                     grid.setCell(next1, grid.getCell(box1));
                     grid.setCell(next2, grid.getCell(box2));
                     grid.setCell(box1, '.');
@@ -226,10 +248,20 @@ public class Day15 {
 
                 if (grid.getCell(next1) == '.' && grid.getCell(next2) == '.') {
                     return true;
-                } else if (grid.getCell(next1) == ']' && grid.getCell(next2) == '['
+                } else if (grid.getCell(box) == grid.getCell(next1) && grid.getCell(box2) == grid.getCell(next2)
+                        && canMoveBigBox(next1, grid, direction)) {
+                    return true;
+                } else if (((grid.getCell(next1) == ']' && grid.getCell(next2) == '[')
+                        || (grid.getCell(next1) == '[' && grid.getCell(next2) == ']'))
                         && canMoveBigBox(next1, grid, direction) && canMoveBigBox(next2, grid, direction)) {
                     return true;
-                } else if (grid.getCell(next1) == '[' && grid.getCell(next2) == ']'
+                } else if (grid.getCell(next1) == grid.getCell(box) && grid.getCell(next2) == grid.getCell(box2)
+                        && canMoveBigBox(next1, grid, direction)) {
+                    return true;
+                } else if (grid.getCell(next1) == '.' && grid.getCell(next2) == grid.getCell(box)
+                        && canMoveBigBox(next2, grid, direction)) {
+                    return true;
+                } else if (grid.getCell(next2) == '.' && grid.getCell(next1) == grid.getCell(box2)
                         && canMoveBigBox(next1, grid, direction)) {
                     return true;
                 }
@@ -237,6 +269,7 @@ public class Day15 {
 
         }
         return false;
+
     }
 
     static long calculateBoxes(Coord box) {

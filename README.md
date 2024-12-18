@@ -114,7 +114,7 @@ Part 2 was a nice surprised despite the needless foundations for various possibl
 #### Day 15: Warehouse Woes
 Of lanternfish and robots! More path mapping and box prediction.
 - Task 1: 1577255
-- Task 2:
+- Task 2: 1597035
 
 I was busy Sunday. My initial solution worked great for Part 1 but did need some debugging due to forgetting to actually move the robot for a standard step. Once I saw the single missing line thing fell into place. 
 
@@ -122,17 +122,23 @@ For Part 2, I spent a lot of time fussing with creating the big version of the g
 
 Part 2 UPDATE: currently working on test input but not full input. Need to refactor to make 'checkBoxMove' and 'moveBox' separate methods. Returning to debug after Day 16.
 
+Refactoring and much trial and error finally got all my edge case box moves moving! Hurrah!
+
 #### Day 16: Reindeer Maze
 Help some reindeer find the shortest point value paths on a grid. Hello Dijkstra’s shortest path algorithm!
 
 - Task 1:
 - Task 2:
 
-#### Day 17
-- Task 1:
+As I'm still trouble shooting those should be easy box shifts I've only made a vague start on Day 16 today. Need to get the path finding working. Might create a mazeNode class to simplify and/or just further complicate the process.
+
+#### Day 17: Chronospatial Computer
+Oh dear...
+- Task 1: 3,1,5,3,7,4,2,7,5
 - Task 2:
 
-#### Day 18
+#### Day 18: RAM Run
+Back to 2d grids, my happy place! This time there are bytes falling on us.
 - Task 1:
 - Task 2:
 
