@@ -77,38 +77,38 @@ public class Coord {
         switch (direction) {
             // up
             case 0:
-                return new Coord(y - 1, x);
+                return new Coord(y - 1, x, 0);
 
             // right
             case 1:
-                return new Coord(y, x + 1);
+                return new Coord(y, x + 1, 1);
 
             // down
             case 2:
-                return new Coord(y + 1, x);
+                return new Coord(y + 1, x, 2);
 
             // left
             case 3:
-                return new Coord(y, x - 1);
+                return new Coord(y, x - 1, 3);
 
             // diagUpRight
             case 4:
-                return new Coord(y - 1, x + 1);
+                return new Coord(y - 1, x + 1, 4);
 
             // diagDownRight
             case 5:
-                return new Coord(y + 1, x + 1);
+                return new Coord(y + 1, x + 1, 5);
 
             // diagDownLeft
             case 6:
-                return new Coord(y + 1, x - 1);
+                return new Coord(y + 1, x - 1, 6);
 
             // diagUpLeft
             case 7:
-                return new Coord(y - 1, x - 1);
+                return new Coord(y - 1, x - 1, 7);
 
             default:
-                return new Coord(y, x);
+                return new Coord(y, x, -1);
         }
     }
 
