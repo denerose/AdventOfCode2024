@@ -137,6 +137,8 @@ Oh dear...
 - Task 1: 3,1,5,3,7,4,2,7,5
 - Task 2:
 
+The initial 'Computer' class for Part 1 was fairly simple once I got my head around each operation. Brute force, test every possible number for Part 2 (nope out if any out put doesn't match the sequence). Took foreeeeever (about 15+ mins of run time and a couple of VScode crashes) eventually got to MAX INT before I admitted defeat on this approach.
+
 #### Day 18: RAM Run
 Back to 2d grids, my happy place! This time there are bytes falling on us.
 - Task 1:

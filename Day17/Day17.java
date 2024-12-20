@@ -12,9 +12,21 @@ public class Day17 {
 
         readInput(commands);
 
-        Computer computer = new Computer(41644071);
+        Computer computer = new Computer(41644071, 16);
 
         computer.takeCommand(commands);
+
+        int a = 183295722;
+        boolean found = false;
+        int[] testCommands = commands.stream().mapToInt(Byte::intValue).toArray();
+
+        while (!found && a < Integer.MAX_VALUE) {
+            a++;
+            Computer testComp = new Computer(a, testCommands);
+            found = testComp.testCommands();
+        }
+
+        System.out.println("The value of register a is: " + a);
 
     }
 
